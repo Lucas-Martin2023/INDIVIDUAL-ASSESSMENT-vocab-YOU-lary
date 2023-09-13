@@ -13,14 +13,24 @@ const addVocabForm = (uid, obj = {}) => {
         <label for="image">Definition</label>
         <input type="text" class="form-control" id="definition" placeholder="Definition" value="${obj.definition || ''}"required>
       </div>
-      <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="languageTech" ${obj.languageTech ? 'checked' : ''}>
-      <label class="form-check-label" for="languageTech">languageTech?</label>
-    </div>
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      <div class="form-group">
+        <label for="image">Select a Language</label>
+        <select id="selectInput" class="form-select" placeholder="Language" value="${obj.language || ''}" required>
+        <option value="" disabled selected>Select a Language</option>
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+        </select>
+      </div>
+  
+    <button type="submit" class="btn btn-success text-white">Submit</button>
     </form>`;
 
   renderToDOM('#form-container', domString);
 };
 
 export default addVocabForm;
+
+// {/* <div class="form-group">
+// <label for="image"></label>
+// <input type="datetime-local" class="form-control" id="timeSubmitted" placeholder="Time" value="${obj.timeSubmitted || ''}">
+// </div> */}

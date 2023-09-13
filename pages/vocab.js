@@ -9,23 +9,27 @@ const emptyVocab = () => {
 const showVocab = (array) => {
   clearDom();
 
-  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-vocab-btn">Add Vocab</button>';
-  renderToDOM('#add-button', btnString);
   let domString = '';
   if (!array.length) {
     domString += '<p>No Vocab Found</p>';
   } else {
+    domString += `
+    <button type="button" class="btn btn-light btn-lg" id="filter-all">All</button>
+    <button type="button" class="btn btn-primary btn-lg" id="filter-english">English</button>
+    <button type="button" class="btn btn-secondary btn-lg" id="filter-spanish">Spanish</button>
+    `;
     array.forEach((item) => {
       domString += `
-        <div class="card">
-          <div class="card-body" style="height: 180px;">
-            <h5 class="card-title">${item.title}</h5>
-              <hr>
-              <i class="btn btn-success fas fa-eye" id="view-vocab-btn--${item.firebaseKey}"></i>
-              <i id="edit-vocab-btn--${item.firebaseKey}" class="fas fa-edit btn btn-info"></i>
-              <i id="delete-vocab-btn--${item.firebaseKey}" class="btn btn-danger fas fa-trash-alt"></i>
-          </div>
-        </div>`;
+      <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">${item.title}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Language: ${item.language}</h6>
+          <p class="card-text">Definition: ${item.definition}</p>
+          <p class="card-text">Time Submitted: ${item.timeSubmitted}</p>
+          <a href="#" id="edit-vocab-btn--${item.firebaseKey}" class="card-link">Edit</a>
+          <a href="#" id="delete-vocab-btn--${item.firebaseKey}" class="card-link">Delete</a>
+      </div>
+      </div>`;
     });
   }
   renderToDOM('#store', domString);

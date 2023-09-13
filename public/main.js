@@ -2,12 +2,14 @@ import ViewDirectorBasedOnUserAuthStatus from '../utils/viewDirector';
 import 'bootstrap';
 import '../styles/main.scss';
 
-const init = () => {
+const welcome = () => {
   document.querySelector('#app').innerHTML = `
-    <h1>Welcome to Vocab-YOU-lary!</h1>
   `;
+};
 
+const init = () => {
   ViewDirectorBasedOnUserAuthStatus();
 };
 
+welcome();
 init();
