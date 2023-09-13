@@ -15,7 +15,7 @@ const viewVocab = (obj) => {
    </div>
    <div class="text-white ms-5 details">
      <h5>${obj.title}</h5>
-     <p>${obj.description || ''}</p>
+     <p>${obj.definition || ''}</p>
      <hr>    
       </div>
     </div>`;

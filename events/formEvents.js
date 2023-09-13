@@ -5,11 +5,12 @@ const formEvents = (user) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     if (e.target.id.includes('submit-vocab')) {
+      const currentTime = new Date().toLocaleString();
       const payload = {
-        title: document.querySelector('#title').value,
         definition: document.querySelector('#definition').value,
-        timeSubmitted: document.querySelector('#timeSubmitted').value,
-        languageTech: document.querySelector('#languageTech').value,
+        language: document.querySelector('#selectInput').value,
+        timeSubmitted: currentTime,
+        title: document.querySelector('#title').value,
         uid: user.uid
       };
 
@@ -23,12 +24,13 @@ const formEvents = (user) => {
     }
 
     if (e.target.id.includes('update-vocab')) {
+      const currentUpdateTime = new Date().toLocaleString();
       const [, firebaseKey] = e.target.id.split('--');
       const payload = {
-        title: document.querySelector('#title').value,
         definition: document.querySelector('#definition').value,
-        timeSubmitted: document.querySelector('#timeSubmitted').value,
-        languageTech: document.querySelector('#languageTech').value,
+        language: document.querySelector('#selectInput').value,
+        timeSubmitted: currentUpdateTime,
+        title: document.querySelector('#title').value,
         uid: user.uid,
         firebaseKey,
       };

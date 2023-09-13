@@ -1,6 +1,8 @@
-import { getVocab, getSingleVocab, deleteVocab } from '../api/vocabData';
+import {
+  getVocab, getSingleVocab, deleteVocab, languageFilter
+} from '../api/vocabData';
 import addVocabForm from '../components/forms/addVocabForm';
-import { showVocab } from '../pages/vocab';
+import { showVocab, emptyVocab } from '../pages/vocab'; // You need to import emptyVocab if it's not already imported.
 
 const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -9,13 +11,15 @@ const domEvents = (user) => {
       if (window.confirm('Want to delete?')) {
         const [, firebaseKey] = e.target.id.split('--');
         deleteVocab(firebaseKey).then(() => {
-          getVocab().then(showVocab);
+          getVocab(user.uid).then((array) => {
+            if (array.length) {
+              showVocab(array);
+            } else {
+              emptyVocab();
+            }
+          });
         });
       }
-    }
-
-    if (e.target.id.includes('add-vocab-btn')) {
-      addVocabForm(user.uid);
     }
 
     if (e.target.id.includes('edit-vocab-btn')) {
@@ -23,5 +27,24 @@ const domEvents = (user) => {
       getSingleVocab(firebaseKey).then((vocabObj) => addVocabForm(user.uid, vocabObj));
     }
   });
+
+  document.querySelector('#store').addEventListener('click', (e) => {
+    if (e.target.id.includes('filter-english')) {
+      languageFilter('English').then(showVocab);
+    }
+  });
+
+  document.querySelector('#store').addEventListener('click', (e) => {
+    if (e.target.id.includes('filter-spanish')) {
+      languageFilter('Spanish').then(showVocab);
+    }
+  });
+
+  document.querySelector('#store').addEventListener('click', (e) => {
+    if (e.target.id.includes('filter-all')) {
+      getVocab(user.uid).then(showVocab);
+    }
+  });
 };
+
 export default domEvents;
