@@ -2,7 +2,7 @@ import {
   getVocab, getSingleVocab, deleteVocab, languageFilter
 } from '../api/vocabData';
 import addVocabForm from '../components/forms/addVocabForm';
-import { showVocab, emptyVocab } from '../pages/vocab'; // You need to import emptyVocab if it's not already imported.
+import { showVocab, emptyVocab } from '../pages/vocab';
 
 const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -32,15 +32,11 @@ const domEvents = (user) => {
     if (e.target.id.includes('filter-english')) {
       languageFilter('English').then(showVocab);
     }
-  });
 
-  document.querySelector('#store').addEventListener('click', (e) => {
     if (e.target.id.includes('filter-spanish')) {
       languageFilter('Spanish').then(showVocab);
     }
-  });
 
-  document.querySelector('#store').addEventListener('click', (e) => {
     if (e.target.id.includes('filter-all')) {
       getVocab(user.uid).then(showVocab);
     }
