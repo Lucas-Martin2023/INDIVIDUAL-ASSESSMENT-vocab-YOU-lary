@@ -29,8 +29,3 @@ const addVocabForm = (uid, obj = {}) => {
 };
 
 export default addVocabForm;
-
-// {/* <div class="form-group">
-// <label for="image"></label>
-// <input type="datetime-local" class="form-control" id="timeSubmitted" placeholder="Time" value="${obj.timeSubmitted || ''}">
-// </div> */}
